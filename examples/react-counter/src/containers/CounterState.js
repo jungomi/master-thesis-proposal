@@ -16,7 +16,6 @@ class CounterState extends React.Component {
   }
 
   handleNotify(store, present) {
-    console.log('[State] Notified :', store);
     // Setting the state makes React re-render the component
     // It can also be used to determine whether the changes have any effect on
     // the current component (avoids unnecessary re-renders)
