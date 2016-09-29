@@ -2,36 +2,8 @@
 import React, { PropTypes } from 'react';
 import Counter from '../components/Counter';
 import { counterValue } from '../state/counter';
-import {
-  disableButton,
-  enableButton,
-  increment,
-  startIncrement,
-  stopIncrement
-} from '../actions/counter';
-
-// Proposes incremented values up to 10 (by calling the same nap function)
-const counterNap = (state, present) => {
-  if (state.counting) {
-    if (state.value < 10) {
-      setTimeout(() => {
-        present(increment(state));
-      }, 1000);
-    } else {
-      present(stopIncrement(state));
-    }
-  } else {
-    if (state.value === 11) {
-      if (state.buttonDisabled) {
-        setTimeout(() => {
-          present(increment(enableButton(state)));
-        }, 5000);
-      } else {
-        present(disableButton(state));
-      }
-    }
-  }
-};
+import { increment, startIncrement } from '../actions/counter';
+import { counterNap } from '../naps/counter';
 
 class CounterState extends React.Component {
   constructor(props) {
