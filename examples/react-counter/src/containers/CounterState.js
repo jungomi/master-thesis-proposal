@@ -15,14 +15,14 @@ class CounterState extends React.Component {
     this.unsubscribe = this.props.model.subscribe(this.handleNotify);
   }
 
-  handleNotify(state, present) {
-    console.log('[State] Notified :', state);
+  handleNotify(store, present) {
+    console.log('[State] Notified :', store);
     // Setting the state makes React re-render the component
     // It can also be used to determine whether the changes have any effect on
     // the current component (avoids unnecessary re-renders)
-    this.setState({ state });
-    counterNap(state, present);
-    if (typeof this.unsubscribe === 'function' && state.value === 12) {
+    this.setState({ store });
+    counterNap(store, present);
+    if (typeof this.unsubscribe === 'function' && store.value === 12) {
       console.log('[State] Unsubscribed');
       this.unsubscribe();
       this.unsubscribe = undefined;
@@ -33,11 +33,11 @@ class CounterState extends React.Component {
     const { model } = this.props;
     return (
       <Counter
-        value={counterValue(model.state)}
+        value={counterValue(model.store)}
         handleClick={() => {
-          model.present(increment(startIncrement(model.state)));
+          model.present(increment(startIncrement(model.store)));
         }}
-        buttonDisabled={model.state.buttonDisabled}
+        buttonDisabled={model.store.buttonDisabled}
       />
     );
   }

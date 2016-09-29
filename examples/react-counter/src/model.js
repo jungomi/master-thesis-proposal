@@ -1,29 +1,29 @@
 /* eslint-disable no-console */
 class Model {
-  constructor(initialState = {}) {
-    this._state = initialState;
+  constructor(initialStore = {}) {
+    this._store = initialStore;
     this.listeners = [];
     this.present = this.present.bind(this);
   }
 
   present(data) {
-    const state = this.state;
+    const store = this.store;
     const equalCounter =
-      state.counting === data.counting
-      && state.value === data.value
-      && state.buttonDisabled === data.buttonDisabled;
-    if (data.value < state.value || equalCounter) {
+      store.counting === data.counting
+      && store.value === data.value
+      && store.buttonDisabled === data.buttonDisabled;
+    if (data.value < store.value || equalCounter) {
       console.log('[Model] Rejected :', data);
       return;
     }
-    this._state = data;
+    this._store = data;
     console.log('[Model] Accepted :', data);
     this.notify();
   }
 
   notify() {
     for (const listener of this.listeners) {
-      listener(this.state, this.present);
+      listener(this.store, this.present);
     }
   }
 
@@ -34,8 +34,8 @@ class Model {
     };
   }
 
-  get state() {
-    return this._state;
+  get store() {
+    return this._store;
   }
 
 }

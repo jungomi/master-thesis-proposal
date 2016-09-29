@@ -1,24 +1,24 @@
-export const enableButton = state => ({
-  ...state,
+export const enableButton = store => ({
+  ...store,
   buttonDisabled: false
 });
 
-export const disableButton = state => ({
-  ...state,
+export const disableButton = store => ({
+  ...store,
   buttonDisabled: true
 });
 
-export const startIncrement = state => ({
-  ...state,
+export const startIncrement = store => ({
+  ...store,
   counting: true
 });
 
-export const stopIncrement = state => ({
-  ...state,
+export const stopIncrement = store => ({
+  ...store,
   counting: false
 });
 
-export const increment = state => ({
-  ...state,
-  value: state.value + 1
+export const increment = store => ({
+  ...store,
+  value: store.value + 1
 });
