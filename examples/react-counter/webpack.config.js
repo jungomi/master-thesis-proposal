@@ -21,6 +21,8 @@ const config = {
   plugins: [
     new CopyWebpackPlugin([{
       from: './index.html'
+    }, {
+      from: './style.css'
     }]),
   ]
 };

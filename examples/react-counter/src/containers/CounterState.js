@@ -62,7 +62,7 @@ class CounterState extends React.Component {
     return (
       <Counter
         value={counterValue(model.state)}
-        onClick={() => {
+        handleClick={() => {
           model.present(increment(startIncrement(model.state)));
         }}
         buttonDisabled={model.state.buttonDisabled}
