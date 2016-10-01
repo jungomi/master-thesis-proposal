@@ -31,6 +31,11 @@ rest should be in the model.
 **No,** multiple `present`s should be avoided. Actions can be composed and then
 call `present` manually, or use a dispatcher.
 
+> How should asynchronous calls be handled inside actions?
+
+Return a promise and call `present` or further actions when it has been
+successfully resolved.
+
 ### State
 
 State is supposed to trigger actions. But when the state is called multiple
@@ -42,6 +47,57 @@ Sounds a little painful, the alternative that `present` returns a promise and
 NAPs are called in the `.then` resp. `.catch`. This would violate the
 unidirectional data flow, but seems so natural and simple to me (I started with
 that idea and discarded it).
+
+### Model
+
+> What should be passed to `present`?
+
+1. The next state (i.e. after all actions have been applied)
+2. The actions, which get called by the model.
+    1. This would mean that the state is always the new one. That could cause
+      problems when a NAP automatically presents, because it assumed
+      a specific state which might not be relevant any more.
+    2. Alternatively the state can be bound (which would be similar to the first
+      solution but allows passing the actions instead of a state).
+
+**Example**
+
+```javascript
+// State that has been accepted and triggers the NAP
+const acceptedState = { value: 1 };
+// State that the NAP would present after 5 seconds, i.e. increment()
+const napState = { value: 2 };
+// Actual state when the 5 seconds finish
+const actualState = { value: 5 };
+// Next state if increment is called on actualState
+const nextState = { value: 6 };
+```
+
+1. Passes `napState` to the model, which rejects it.
+2. Passes `increment` to the model, which would call `increment(actualState)`
+  and the model would accept `nextState`.
+
+This essentially requires the decision whether the NAP is supposed to present
+a specific state that has been identified as a logical next state (which could
+not be valid any more) [**1)** or **2ii)**], or blindly invoke an action, which
+may or may not be suited for the actual state at the point of invocation
+[**2i)**]. I would tend to the former. **2ii)** requires an action composer, but
+would also allow the user to decide whether the action should be called with the
+state that has been passed to the NAP or the state that will be available when
+the action would be presented.
+
+
+### Middleware
+
+Middleware seems quite easy to apply.
+
+- At the beginning of `present`, the proposed data is just passed to the
+    middleware.
+- On `notify` the middleware can simply subscribe to the model and receive all
+    states that have been accepted (for instance collecting a state history).
+- Before any actions. This needs an action composer, then it's just as easy.
+    Otherwise the user would have to call it manually (which defeats the purpose
+    of a middleware).
 
 ### What I like
 
