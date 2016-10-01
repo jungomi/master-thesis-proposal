@@ -8,16 +8,25 @@
     "dev": "webpack-dev-server --hot --inline --config webpack.config.js",
     "build": "NODE_ENV=production webpack --progress --config webpack.config.js",
     "clean": "rm -rf dist",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "ava --verbose",
+    "watch:test": "npm run test -- --watch"
   },
   "keywords": [],
   "author": "Michael Jungo",
   "license": "MIT",
+  "ava": {
+    "require": [
+      "./test/helpers/setup.js"
+    ],
+    "babel": "inherit"
+  },
   "dependencies": {
     "react": "^15.3.2",
     "react-dom": "^15.3.2"
   },
   "devDependencies": {
+    "ava": "^0.16.0",
     "babel-core": "^6.16.0",
     "babel-eslint": "^7.0.0",
     "babel-loader": "^6.2.5",
@@ -30,6 +39,7 @@
     "eslint-loader": "^1.5.0",
     "eslint-plugin-html": "^1.5.3",
     "eslint-plugin-react": "^6.3.0",
+    "ignore-styles": "^5.0.1",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.1"
   }
