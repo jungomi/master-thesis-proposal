@@ -20,8 +20,11 @@ The counter has the following actions:
 
 ```sh
 npm install     # installs dependencies
+
 npm start       # starts the webpack dev server on localhost:8080
 npm run build   # bundles the app into /dist
+
+npm test        # runs the tests
 ```
 
 [sam]: http://sam.js.org/
