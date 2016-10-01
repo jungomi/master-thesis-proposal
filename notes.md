@@ -50,6 +50,7 @@ that idea and discarded it).
 - Actions are pure functions computing the next state from the previous one
 - Proposing / presenting values to the model which filters them
 - Next-action predicate that will be called as a logical subsequence
+- Seems really easy to test
 
 ### What I do not like
 
