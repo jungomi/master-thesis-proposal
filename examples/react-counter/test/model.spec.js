@@ -48,3 +48,11 @@ test('subscribe', t => {
   unsubscribe();
   t.is(t.context.model.listeners.length, 0);
 });
+
+test('subscribe without function', t => {
+  const listen = {};
+  const subscribeError = 'Subscribe expected a function';
+  t.is(t.context.model.listeners.length, 0);
+  t.throws(() => t.context.model.subscribe(listen), subscribeError);
+  t.is(t.context.model.listeners.length, 0);
+});

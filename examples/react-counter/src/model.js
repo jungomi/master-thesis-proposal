@@ -28,6 +28,9 @@ class Model {
   }
 
   subscribe(listener) {
+    if (typeof listener !== 'function') {
+      throw new Error('Subscribe expected a function');
+    }
     this.listeners.push(listener);
     return () => {
       this.listeners.splice(this.listeners.indexOf(listener));
