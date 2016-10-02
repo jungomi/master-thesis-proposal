@@ -2,8 +2,8 @@
 
 ## Overview
 
-The [SAM pattern][sam.js] a reactive functional pattern that clearly separates
-the model from the view. It is based on the [Temporal Logic of Actions
+The [SAM pattern][sam.js] is a reactive functional pattern that clearly
+separates the model from the view. It is based on the [Temporal Logic of Actions
 (TLA+)][tla], which is a robust formal specification to model, describe, analyse
 and verify systems. Some key goals of SAM are:
 
@@ -18,8 +18,8 @@ and verify systems. Some key goals of SAM are:
 
 The model contains the application state (store) and is responsible to make it
 persistent. Any change to the store must be proposed / presented to the model,
-which decides to accept or reject them. When the store changes, everyone who
-needs to learn about the new store is notified.
+which then decides to accept or reject them. When the store changes, everyone
+who needs to learn about the new store, gets notified.
 
 ### State
 
@@ -45,13 +45,13 @@ of the data (the model is supposed to do that).
 ### View / State Representation
 
 The state representation may be in any form (e.g. HTML, JSON, plain text, etc.)
-using the technology the user prefers. These should simply display the data that
-they receive. A good example for this are functional stateless React components.
-The view itself is not a response to a previous view. It simply renders the
-data without knowing how the data has been produced. For instance when a part of
-the view is clicked, it may trigger an action which may or may not change the
-state representation, but the view does not expect or wait for a response to
-that action.
+using the technology the user prefers. These should simply display the data they
+receive. A good example for this are functional stateless React components.  It
+is also important to understand that the view itself is not a response to
+a previous view. It simply renders the data without knowing how the data has
+been produced. For instance when a part of the view is clicked, it may trigger
+an action which may or may not change the state representation, but the view
+does not expect or wait for a response to that action.
 
 ## Comparison to other patterns / architectures
 
@@ -81,8 +81,11 @@ under the MV* family (e.g. Model-View-Presenter (MVP) or Model-View-ViewModel
 ### Flux
 
 [Flux][flux-overview] is an application architecture that Facebook created to
-build scalable client-side web applications. The moved away from the MVC pattern
-because it really complicated for their large codebase.
+build scalable client-side web applications. They moved away from the MVC
+pattern because it was really complicated and difficult to maintain for their
+large codebase. Facebook has been criticised for misunderstanding MVC or using
+it wrong and that the Flux diagram is essentially what MVC is supposed to look
+like just with different labels.
 
 ![Flux Architecture][flux-figure]
 
@@ -96,8 +99,8 @@ because it really complicated for their large codebase.
 ### Elm - Model-Update-View
 
 Elm is a functional programming language inspired by Haskell that compiles to
-JavaScript. It is meant for creating web apps easily and even has its own
-virtual DOM implementation and therefore competes with React.
+JavaScript. It is meant for creating web apps and even has its own virtual DOM
+implementation and therefore competes with React.
 
 Elm enforces the [Model-Update-View architecture][elm-arch] (also referred to as
 the Elm architecture), but the architecture can be used to structure any
@@ -110,8 +113,8 @@ front-end project.
 
 ### Redux
 
-[Redux][redux] is inspired by Flux, but avoids its complexity with the
-influence of the Elm architecture.
+[Redux][redux] is inspired by Flux, but avoids its complexity by applying some
+concepts of the Elm architecture.
 
 ![Redux Flow][redux-figure]
 
