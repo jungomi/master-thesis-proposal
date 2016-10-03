@@ -1,4 +1,5 @@
-/* eslint-disable no-console */
+import { logAccepted, logRejected } from './debug';
+
 class Model {
   constructor(initialStore = {}) {
     this._store = initialStore;
@@ -13,11 +14,11 @@ class Model {
       && store.value === data.value
       && store.buttonDisabled === data.buttonDisabled;
     if (data.value < store.value || equalCounter) {
-      console.log('[Model] Rejected :', data);
+      logRejected('Rejected :', data);
       return;
     }
     this._store = data;
-    console.log('[Model] Accepted :', data);
+    logAccepted('Accepted :', data);
     this.notify();
   }
 

@@ -1,5 +1,5 @@
-/* eslint-disable no-console */
 import React, { PropTypes } from 'react';
+import { logState } from '../debug';
 import Counter from '../components/Counter';
 import { increment, startIncrement } from '../actions/counter';
 import { counterNap } from '../naps/counter';
@@ -21,7 +21,7 @@ class CounterState extends React.Component {
     this.setState({ store });
     counterNap(store, present);
     if (typeof this.unsubscribe === 'function' && store.value === 12) {
-      console.log('[State] Unsubscribed');
+      logState('Unsubscribed');
       this.unsubscribe();
       this.unsubscribe = undefined;
     }
