@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import React, { PropTypes } from 'react';
 import Counter from '../components/Counter';
-import { counterValue } from '../state/counter';
 import { increment, startIncrement } from '../actions/counter';
 import { counterNap } from '../naps/counter';
 
@@ -32,7 +31,7 @@ class CounterState extends React.Component {
     const { model } = this.props;
     return (
       <Counter
-        value={counterValue(model.store)}
+        value={model.store.value || 0}
         handleClick={() => {
           model.present(increment(startIncrement(model.store)));
         }}
