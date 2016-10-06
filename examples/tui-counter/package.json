@@ -1,0 +1,24 @@
+{
+  "name": "tui-counter",
+  "version": "1.0.0",
+  "description": "SAM TUI counter example",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node .",
+    "debug": "DEBUG=counter,model:*,state npm start",
+    "lint": "eslint .",
+    "test": "ava --verbose",
+    "watch:test": "npm run test -- --watch"
+  },
+  "keywords": [],
+  "author": "Michael Jungo",
+  "license": "MIT",
+  "dependencies": {
+    "debug": "^2.2.0"
+  },
+  "devDependencies": {
+    "ava": "^0.16.0",
+    "eslint": "^3.7.1",
+    "sinon": "^1.17.6"
+  }
+}
