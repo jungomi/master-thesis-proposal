@@ -1,6 +1,6 @@
-const test = require('ava');
-const sinon = require('sinon');
-const counterState = require('../../src/state/counter');
+import test from 'ava';
+import sinon from 'sinon';
+import counterState from '../../src/state/counter';
 
 test.beforeEach(t => {
   t.context.unsubscribe = sinon.spy();
