@@ -130,3 +130,46 @@ Middleware seems quite easy to apply.
 - A single next-action predicate
   - It does make sense if it is a state machine
   - Actions would need to be composed together
+
+## Differences to [SAM samples][sam-samples]
+
+### Actions
+
+Their actions present the data to the model. This would call `present` multiple
+times if the actions are chained. The workaround is to create actions for one
+specific situation. This does not seem very modular. It could be decomposed into
+functions that are called within the actions.
+
+### Model
+
+The model calls `render`, which lets the state compute their state
+representations.
+
+`present` receives an object that gets translated to the model properties, it
+seems similar to Redux, which has been criticised for exactly that:
+
+> [...] in Redux the reducer creates an unnecessary and unwanted coupling between the
+> model mutations and the logic that translates intents into model property
+> values. [source: [SAM actions][sam.js-actions]]
+
+It simply removed the middle man. But my current approach does not work well for
+all actions (e.g. reset the counter, would somehow needed to be included in the
+store itself). I think a good solution (and middle ground) would be to change
+the signature of `present` to `present(store [, options])` where `options` is an
+object with additional information to the model. So to reset the counter it
+would be invoked as follows: `present(initialStore, { reset: true })`. Actions
+would also need to be adapted so they return both arguments.
+
+### State
+
+Views subscribe to the state and get notified when the state representation
+changes. This is a good idea, as multiple views may use the same state
+representation. I didn't think of this at first, because I started with the
+React example, and it's very common to have a container around a component to
+pass a certain state to a stateless component. To make it more generic and
+probably play nicely with SAM, Higher Order Components (HOC) can be used (see:
+[Higher-order components explained][hoc-explained]).
+
+[hoc-explained]: https://facebook.github.io/react/blog/2016/07/13/mixins-considered-harmful.html#higher-order-components-explained
+[sam.js-actions]: http://sam.js.org/#actions
+[sam-samples]: https://github.com/jdubray/sam-samples
